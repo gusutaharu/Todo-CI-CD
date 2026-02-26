@@ -11,7 +11,6 @@ permissions:
 env:
   workload_identity_provider: projects/676646421279/locations/global/workloadIdentityPools/github-actions/providers/github
   service_account: cicd-todo-service@todo-ci-cd.iam.gserviceaccount.com
-  PROJECT_ID: todo-ci-cd
 
 jobs:
   build:
@@ -100,9 +99,8 @@ jobs:
       - name: Deploy to Firebase
         uses: FirebaseExtended/action-hosting-deploy@v0
         with:
-          repoToken: '${{ secrets.GITHUB_TOKEN }}'
           firebaseServiceAccount: '${{ steps.auth.outputs.credentials_json }}' 
-          projectId: '${{ env.PROJECT_ID }}'
+          projectId: 676646421279
           channelId: live
 
       - name: Remove private key
