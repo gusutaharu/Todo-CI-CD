@@ -72,6 +72,7 @@ jobs:
         with:
           workload_identity_provider: 'projects/${{ secrets.PROJECT_NUMBER }}/locations/global/workloadIdentityPools/${{ secrets.POOL_NAME }}/providers/${{ secrets.PROVIDER_NAME }}'
           service_account: '${{ secrets.SERVICE_ACCOUNT_EMAIL }}'
+          audience: 'https://github.com/${{ secrets.GITHUB_REPOSITORY }}'
 
       - name: Setup Node.js
         uses: actions/setup-node@v4
