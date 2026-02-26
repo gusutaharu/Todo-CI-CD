@@ -9,7 +9,7 @@ permissions:
   id-token: write
 
 env:
-  workload_identity_provider: projects/todo-ci-cd/locations/global/workloadIdentityPools/github-actions/providers/github
+  workload_identity_provider: projects/676646421279/locations/global/workloadIdentityPools/github-actions/providers/github
   service_account: cicd-todo-service@todo-ci-cd.iam.gserviceaccount.com
 
 jobs:
