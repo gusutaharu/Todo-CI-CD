@@ -9,7 +9,7 @@ permissions:
   id-token: write
 
 env:
-  workload_identity_provider: projects/todo-ci-cd/locations/global/workloadIdentityPools/todo-workload-identity-pool/providers/todo-workload-identity-provider
+  workload_identity_provider: projects/todo-ci-cd/locations/global/workloadIdentityPools/github-actions/providers/github
   service_account: cicd-todo-service@todo-ci-cd.iam.gserviceaccount.com
 
 jobs:
@@ -91,7 +91,7 @@ jobs:
         with:
           workload_identity_provider: ${{ env.workload_identity_provider }}
           service_account: ${{ env.service_account }}
-          audience: https://github.com/<GitHubユーザー名>
+          audience: https://github.com/gusutaharu
 
       - name: Install dependencies
         run: npm install
