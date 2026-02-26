@@ -85,13 +85,14 @@ jobs:
       - name: Install Firebase CLI
         run: npm install -g firebase-tools
 
-      - id: 'auth'
-        name: 'Authenticate to Google Cloud'
-        uses: 'google-github-actions/auth@v2'
+      - id: "auth"
+        name: "Authenticate to Google Cloud"
+        uses: "google-github-actions/auth@v2"
         with:
           create_credentials_json: true
           workload_identity_provider: ${{ env.workload_identity_provider }}
           service_account: ${{ env.service_account }}
+          audience: https://github.com/gusutaharu
 
       - name: Install dependencies
         run: npm install
@@ -99,12 +100,11 @@ jobs:
       - name: Deploy to Firebase
         uses: FirebaseExtended/action-hosting-deploy@v0
         with:
-          repoToken: '${{ secrets.GITHUB_TOKEN }}'
-          firebaseServiceAccount: '${{ steps.auth.outputs.credentials_json }}' 
+          repoToken: "${{ secrets.GITHUB_TOKEN }}"
+          firebaseServiceAccount: "${{ steps.auth.outputs.credentials_json }}"
           projectId: todo-ci-cd
           channelId: live
 
       - name: Remove private key
         if: always()
         run: rm -f $HOME/private-key.json
-        
