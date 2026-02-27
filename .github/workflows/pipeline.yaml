@@ -87,16 +87,19 @@ jobs:
 
       - id: "auth"
         name: "Authenticate to Google Cloud"
-        uses: "google-github-actions/auth@v4"
+        uses: "google-github-actions/auth@v2"
         with:
           workload_identity_provider: ${{ env.workload_identity_provider }}
           service_account: ${{ env.service_account }}
           audience: https://github.com/gusutaharu
+          create_credentials_file: true
+          # Firebaseの操作に必要なスコープを付与
+          access_token_scopes: "https://www.googleapis.com/auth/cloud-platform, https://www.googleapis.com/auth/firebase"
 
       - name: Install dependencies
         run: npm install
 
       - name: Deploy to Firebase
+        env:
+          GOOGLE_APPLICATION_CREDENTIALS: ${{ steps.auth.outputs.credentials_file_path }}
         run: firebase deploy --only hosting --project todo-ci-cd
-
-
