@@ -93,8 +93,6 @@ jobs:
           service_account: ${{ env.service_account }}
           audience: https://github.com/gusutaharu
           create_credentials_file: true
-          # Firebaseの操作に必要なスコープを付与
-          access_token_scopes: "https://www.googleapis.com/auth/cloud-platform, https://www.googleapis.com/auth/firebase"
 
       - name: Install dependencies
         run: npm install
