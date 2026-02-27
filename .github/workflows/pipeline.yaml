@@ -89,20 +89,16 @@ jobs:
         name: "Authenticate to Google Cloud"
         uses: "google-github-actions/auth@v2"
         with:
-          create_credentials_file: true
           workload_identity_provider: ${{ env.workload_identity_provider }}
           service_account: ${{ env.service_account }}
           audience: https://github.com/gusutaharu
+          create_credentials_file: true
 
       - name: Install dependencies
         run: npm install
 
       - name: Deploy to Firebase
-        uses: FirebaseExtended/action-hosting-deploy@v0
-        with:
-          repoToken: "${{ secrets.GITHUB_TOKEN }}"
-          projectId: todo-ci-cd
-          channelId: live
+        run: firebase deploy --only hosting
 
       - name: Remove private key
         if: always()
