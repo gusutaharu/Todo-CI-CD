@@ -4,10 +4,6 @@ on:
   push:
     branches: [main]
 
-permissions:
-  contents: read
-  id-token: write
-
 env:
   workload_identity_provider: projects/676646421279/locations/global/workloadIdentityPools/github-actions/providers/github
   service_account: cicd-todo-service@todo-ci-cd.iam.gserviceaccount.com
@@ -16,6 +12,10 @@ jobs:
   build:
     name: Build phase
     runs-on: ubuntu-latest
+
+    permissions:
+      contents: read
+      id-token: write
 
     steps:
       - name: Checkout code
