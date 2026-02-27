@@ -89,7 +89,7 @@ jobs:
         name: "Authenticate to Google Cloud"
         uses: "google-github-actions/auth@v2"
         with:
-          create_credentials_json: true
+          create_credentials_file: true
           workload_identity_provider: ${{ env.workload_identity_provider }}
           service_account: ${{ env.service_account }}
           audience: https://github.com/gusutaharu
@@ -101,7 +101,7 @@ jobs:
         uses: FirebaseExtended/action-hosting-deploy@v0
         with:
           repoToken: "${{ secrets.GITHUB_TOKEN }}"
-          firebaseServiceAccount: "${{ steps.auth.outputs.credentials_json }}"
+          firebaseServiceAccount: "${{ steps.auth.outputs.credentials_file_path }}"
           projectId: todo-ci-cd
           channelId: live
 
